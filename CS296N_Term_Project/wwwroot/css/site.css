@@ -7,6 +7,73 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+/*====================================My CSS====================================*/
+.flex-parent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+/*-----------------------------------Post Obj-----------------------------------*/
+.post-obj {
+    width: 45%;
+    position: relative;
+    min-width: 400px;
+    margin: auto;
+    margin-top: 0px;
+    margin-bottom: 50px;
+    border: 1px solid rgba(0, 0, 0, 0.418);
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: left;
+    cursor: default;
+    object-fit: contain;
+}
+
+.post-obj-img {
+    max-width: 98%;
+    object-fit: contain;
+    height: auto;
+    padding: 3px;
+}
+
+.post-obj-top {
+    margin: 0px;
+    padding: 0px;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.post-obj-bottom {
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    padding: 10px;
+    object-fit: contain;
+}
+
+.poster-name {
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    padding: 10px;
+    object-fit: contain;
+}
+
+.post-like-button {
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    padding: 10px;
+    object-fit: contain;
+}
+
+/*==================================End My CSS==================================*/
+
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;

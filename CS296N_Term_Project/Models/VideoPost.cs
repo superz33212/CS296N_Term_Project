@@ -11,8 +11,8 @@ namespace CS296N_Term_Project.Models
         //TODO: Properly set up data annotations
         [Key]
         public int PostId { get; set; }
-        //TODO: Set up user and change this to a user obj
-        public int UserId { get; set; }
+        public AppUser User { get; set; }
+        public string PosterName { get; set; }
         [Required(ErrorMessage = "You must enter the name of the title.")]
         [StringLength(50, MinimumLength = 1)]
         public string Title { get; set; }

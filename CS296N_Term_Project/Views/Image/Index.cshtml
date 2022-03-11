@@ -2,6 +2,21 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Image</h1>
-</div>
+<main>
+    <div class="text-center">
+        <h1 class="display-4">Image</h1>
+    </div>
+
+    <div class="flex-parent">
+        @foreach (ImagePost post in ViewBag.Consoles)
+        {
+            <div class="post-obj">
+                <img src="@Url.Content(post.Path)" alt="Post Image" class="post-obj-img">
+                <div class="post-obj-bottom">
+                    <h5 class="poster-name">@post.PosterName</h5>
+                    <img src="" alt="Console Image" class="post-like-button">
+                </div>
+            </div>
+        }
+    </div>
+</main>

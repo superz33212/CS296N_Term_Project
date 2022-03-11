@@ -10,8 +10,8 @@ namespace CS296N_Term_Project.Models
     {
         //TODO: Properly set up data annotations
         public int PostId { get; set; }
-        //TODO: Set up user and change this to a user obj
-        public int UserId { get; set; }
+        public AppUser User { get; set; }
+        public string PosterName { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int Likes { get; set; }
