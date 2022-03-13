@@ -1,4 +1,5 @@
 ﻿using CS296N_Term_Project.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,31 +8,90 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CS296N_Term_Project.Controllers
+namespace CCS296N_Term_Project.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly ILogger<AccountController> _logger;
+        private UserManager<AppUser> userManager;
+        private SignInManager<AppUser> signInManager;
 
-        public AccountController(ILogger<AccountController> logger)
+        public AccountController(UserManager<AppUser> userMngr,
+            SignInManager<AppUser> signInMngr)
         {
-            _logger = logger;
+            userManager = userMngr;
+            signInManager = signInMngr;
         }
 
-        public IActionResult Index()
+        public IActionResult Register()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterVM model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var user = new AppUser { UserName = model.Username };
+                var result = await userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return View(model);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+
+        [HttpGet]
+        public IActionResult LogIn(string returnURL = "")
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var model = new LoginVM
+            {
+                ReturnUrl = returnURL
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LogIn(LoginVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await signInManager.PasswordSignInAsync(model.Username, model.Password, isPersistent: model.RememberMe, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    {
+                        return Redirect(model.ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+            }
+            ModelState.AddModelError("", "Invalid username/password.");
+            return View(model);
+        }
+
+
+        public async Task<IActionResult> LogOut()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+        public ViewResult AccessDenied()
+        {
+            return View();
         }
     }
 }

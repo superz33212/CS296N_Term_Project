@@ -27,13 +27,24 @@ a.navbar-brand {
     border: 1px solid rgba(0, 0, 0, 0.418);
     border-radius: 5px;
     font-weight: bold;
-    text-align: left;
+    text-align: center;
     cursor: default;
     object-fit: contain;
 }
 
+.post-obj-title {
+    max-width: 98%;
+    text-align: center;
+    justify-content: center;
+    object-fit: contain;
+    height: auto;
+    padding: 3px;
+}
+
 .post-obj-img {
     max-width: 98%;
+    text-align: center;
+    justify-content: center;
     object-fit: contain;
     height: auto;
     padding: 3px;
@@ -42,10 +53,17 @@ a.navbar-brand {
 .post-obj-top {
     margin: 0px;
     padding: 0px;
-    text-align: left;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: right;
+    display: grid;
+    grid-template-columns: 88% 12%;
+}
+
+.single-post-obj-top {
+    margin: 0px;
+    padding: 0px;
+    justify-content: right;
+    display: grid;
+    grid-template-columns: 93% 7%;
 }
 
 .post-obj-bottom {
@@ -57,19 +75,48 @@ a.navbar-brand {
 }
 
 .poster-name {
-    width: 95%;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
     padding: 10px;
+    text-align: left;
     object-fit: contain;
 }
 
 .post-like-button {
-    width: 95%;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
     padding: 10px;
+    max-width: 50px;
+    justify-content: right;
+    text-align: right;
     object-fit: contain;
+}
+
+.post-description {
+    padding: 4px;
+    text-align: left;
+    object-fit: contain;
+}
+
+/*-----------------------------------Comment------------------------------------*/
+
+.post-comments {
+    display: grid;
+    grid-template-columns: 100%;
+}
+
+.post-add-comment {
+    display: grid;
+    grid-template-columns: 100%;
+    overflow: auto;
+}
+
+.post-comment {
+    
+}
+
+.commenter-name {
+
+}
+
+.comment-content {
+
 }
 
 /*==================================End My CSS==================================*/

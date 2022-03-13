@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CS296N_Term_Project.Models
 {
@@ -13,5 +14,7 @@ namespace CS296N_Term_Project.Models
         //TODO: User likes?
         //public List<Likes> LikedPosts { get; set; }
         //public ICollection<Comment> Comments { get; set; }
+        [NotMapped]
+        public IList<string> RoleNames { get; set; }
     }
 }

@@ -9,16 +9,19 @@ namespace CS296N_Term_Project.Models.DataLayer
     {
         void Insert(ImagePost obj);
         void Insert(VideoPost obj);
-        void Insert(Comment obj);
+        void Insert(ImageComment obj);
+        void Insert(VideoComment obj);
 
         void Update(ImagePost obj);
         void Update(VideoPost obj);
-        void Update(Comment obj);
+        void Update(ImageComment obj);
+        void Update(VideoComment obj);
 
 
         void Delete(ImagePost obj);
         void Delete(VideoPost obj);
-        void Delete(Comment obj);
+        void Delete(ImageComment obj);
+        void Delete(VideoComment obj);
 
         Task SaveAsync();
 

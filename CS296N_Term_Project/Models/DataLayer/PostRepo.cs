@@ -22,47 +22,62 @@ namespace CS296N_Term_Project.Models.DataLayer
         #region Insert, Update, Remove, Save ==========
         public void Insert(ImagePost obj)
         {
-            this.db.Image.Add(obj);
+            this.db.Images.Add(obj);
         }
 
         public void Insert(VideoPost obj)
         {
-            this.db.Video.Add(obj);
+            this.db.Videos.Add(obj);
         }
 
-        public void Insert(Comment obj)
+        public void Insert(ImageComment obj)
         {
-            this.db.Comments.Add(obj);
+            this.db.ImageComments.Add(obj);
         }
-        
+
+        public void Insert(VideoComment obj)
+        {
+            this.db.VideoComments.Add(obj);
+        }
+
         public void Update(ImagePost obj)
         {
-            this.db.Image.Update(obj);
+            this.db.Images.Update(obj);
         }
 
         public void Update(VideoPost obj)
         {
-            this.db.Video.Update(obj);
+            this.db.Videos.Update(obj);
         }
 
-        public void Update(Comment obj)
+        public void Update(ImageComment obj)
         {
-            this.db.Comments.Update(obj);
+            this.db.ImageComments.Update(obj);
+        }
+
+        public void Update(VideoComment obj)
+        {
+            this.db.VideoComments.Update(obj);
         }
 
         public void Delete(ImagePost obj)
         {
-            this.db.Image.Remove(obj);
+            this.db.Images.Remove(obj);
         }
 
         public void Delete(VideoPost obj)
         {
-            this.db.Video.Remove(obj);
+            this.db.Videos.Remove(obj);
         }
 
-        public void Delete(Comment obj)
+        public void Delete(ImageComment obj)
         {
-            this.db.Comments.Remove(obj);
+            this.db.ImageComments.Remove(obj);
+        }
+
+        public void Delete(VideoComment obj)
+        {
+            this.db.VideoComments.Remove(obj);
         }
 
         public async Task SaveAsync()
@@ -82,13 +97,13 @@ namespace CS296N_Term_Project.Models.DataLayer
 
         public async Task<ImagePost> SelectImagesByIdAsync(int id)
         {
-            ImagePost temp = await db.Image.Where(s => s.PostId == id).FirstAsync<ImagePost>();
+            ImagePost temp = await db.Images.Where(s => s.PostId == id).FirstAsync<ImagePost>();
             return temp;
         }
 
         public async Task<VideoPost> SelectVideoByIdAsync(int id)
         {
-            VideoPost temp = await db.Video.Where(s => s.PostId == id).FirstAsync<VideoPost>();
+            VideoPost temp = await db.Videos.Where(s => s.PostId == id).FirstAsync<VideoPost>();
             return temp;
         }
         #endregion ====================================
@@ -96,13 +111,13 @@ namespace CS296N_Term_Project.Models.DataLayer
         #region Select Large Groups ===================
         public async Task<IEnumerable<ImagePost>> SelectImagesAsync()
         {
-            List<ImagePost> temp = await db.Image.ToListAsync<ImagePost>();
+            List<ImagePost> temp = await db.Images.ToListAsync<ImagePost>();
             return temp;
         }
 
         public async Task<IEnumerable<VideoPost>> SelectVideoAsync()
         {
-            List<VideoPost> temp = await db.Video.ToListAsync<VideoPost>();
+            List<VideoPost> temp = await db.Videos.ToListAsync<VideoPost>();
             return temp;
         }
         #endregion ====================================

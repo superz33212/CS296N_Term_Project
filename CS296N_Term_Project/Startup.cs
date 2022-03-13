@@ -1,7 +1,11 @@
+using CS296n_Term_Project.Data;
+using CS296N_Term_Project.Models;
 using CS296N_Term_Project.Models.Contexts;
+using CS296N_Term_Project.Models.DataLayer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,9 +30,15 @@ namespace CS296N_Term_Project
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<AllContext>(options =>
-                options.UseSqlServer(
-                Configuration.GetConnectionString("AllContext")));
+
+            services.AddDbContext<AllContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AllContext")));
+
+            services.AddTransient<IPostRepo, PostRepo>();
+            services.AddHttpContextAccessor();
+
+            services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<AllContext>()
+                .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +59,9 @@ namespace CS296N_Term_Project
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -57,6 +70,8 @@ namespace CS296N_Term_Project
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            SeedData.SeedAdminUser(app.ApplicationServices).Wait();
         }
     }
 }

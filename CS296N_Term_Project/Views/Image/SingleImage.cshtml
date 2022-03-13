@@ -1,0 +1,35 @@
+﻿@model CommentVM;
+@{
+    ViewData["Title"] = "SingleImage";
+}
+
+
+<main>
+    <h1 class="post-obj-title">@ViewBag.ImagePost.Title</h1>
+    <img src="@Url.Content(ViewBag.ImagePost.Path)" alt="Post Image" class="post-obj-img">
+    <div class="single-post-obj-top">
+        <h5 class="poster-name">@ViewBag.ImagePost.PosterName</h5>
+        <img src="https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png" alt="Like Button" class="post-like-button">
+    </div>
+    <div class="post-obj-bottom">
+        <h6 class="post-description">@ViewBag.ImagePost.Description</h6>
+    </div>
+    <div class="post-comments">
+        <h3>Comments</h3>
+        <form asp-action="SingleImage" class="post-add-comment">
+            <textarea placeholder="Comment" asp-for="Description"></textarea>
+            <input type="hidden" asp-for="imagePost" value="@ViewBag.ImagePost" />
+            <button type="submit" class="btn btn-secondary">Comment</button>
+        </form>
+        @if (ViewBag.ImagePost.Comments != null)
+        {
+            @foreach (ImageComment comment in ViewBag.ImagePost.Comments)
+            {
+                <div class="post-comment">
+                    <h3 class="commenter-name">@comment.User.ScreenName</h3>
+                    <p class="comment-content">@comment.Description</p>
+                </div>
+            }
+        }
+    </div>
+</main>
