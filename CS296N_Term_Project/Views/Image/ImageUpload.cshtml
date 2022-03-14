@@ -1,0 +1,15 @@
+﻿@model ImagePost
+@{
+    ViewData["Title"] = "ImageUpload";
+}
+
+
+<main>
+    <h1 class="post-obj-title">Make Post</h1>
+    <form>
+        <input type="text" asp-for="Title"/>
+        <input type="file" id="inFile" asp-for="Path" />
+        <textarea placeholder="Description" asp-for="Description"></textarea>
+        <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+</main>

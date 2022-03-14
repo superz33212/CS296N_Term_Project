@@ -11,7 +11,7 @@ namespace CS296N_Term_Project.Models
         //TODO: Properly set up data annotations
         [Key]
         public int CommentId { get; set; }
-        public AppUser User { get; set; }
+        public AppUser Commenter { get; set; }
         public VideoPost Post { get; set; }
         public string Description { get; set; }
         public int Likes { get; set; }

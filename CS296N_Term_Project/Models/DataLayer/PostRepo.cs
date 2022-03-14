@@ -17,6 +17,15 @@ namespace CS296N_Term_Project.Models.DataLayer
             this.db = ctx;
         }
 
+        public IQueryable<ImagePost> Images
+        {
+            get
+            {
+                return this.db.Images.Include(r => r.Comments)
+                                      .ThenInclude(r => r.Commenter);
+            }
+        }
+
         private UserManager<AppUser> userManager;
 
         #region Insert, Update, Remove, Save ==========
@@ -111,7 +120,8 @@ namespace CS296N_Term_Project.Models.DataLayer
         #region Select Large Groups ===================
         public async Task<IEnumerable<ImagePost>> SelectImagesAsync()
         {
-            List<ImagePost> temp = await db.Images.ToListAsync<ImagePost>();
+            List<ImagePost> temp = await db.Images.Include(i => i.Comments)
+                                                    .ToListAsync<ImagePost>();
             return temp;
         }
 

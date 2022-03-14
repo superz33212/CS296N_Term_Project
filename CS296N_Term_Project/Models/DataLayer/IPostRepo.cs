@@ -7,6 +7,8 @@ namespace CS296N_Term_Project.Models.DataLayer
 {
     public interface IPostRepo
     {
+        public IQueryable<ImagePost> Images { get; }
+
         void Insert(ImagePost obj);
         void Insert(VideoPost obj);
         void Insert(ImageComment obj);

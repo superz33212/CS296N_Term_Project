@@ -18,15 +18,15 @@
         <h3>Comments</h3>
         <form asp-action="SingleImage" class="post-add-comment">
             <textarea placeholder="Comment" asp-for="Description"></textarea>
-            <input type="hidden" asp-for="imagePost" value="@ViewBag.ImagePost" />
-            <button type="submit" class="btn btn-secondary">Comment</button>
+            <input type="hidden" asp-for="PostId" value="@ViewBag.ImagePost.PostId" />
+            <button type="submit" class="btn btn-primary">Comment</button>
         </form>
-        @if (ViewBag.ImagePost.Comments != null)
+        @if (ViewBag.ImagePost.GetComments() != null)
         {
-            @foreach (ImageComment comment in ViewBag.ImagePost.Comments)
+            @foreach (ImageComment comment in ViewBag.ImagePost.GetComments())
             {
                 <div class="post-comment">
-                    <h3 class="commenter-name">@comment.User.ScreenName</h3>
+                    <h3 class="commenter-name">@comment.Commenter.ScreenName</h3>
                     <p class="comment-content">@comment.Description</p>
                 </div>
             }

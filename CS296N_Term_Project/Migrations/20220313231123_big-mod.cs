@@ -196,7 +196,7 @@ namespace CS296N_Term_Project.Migrations
                 {
                     CommentId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(nullable: true),
+                    CommenterId = table.Column<string>(nullable: true),
                     PostId = table.Column<int>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Likes = table.Column<int>(nullable: false)
@@ -205,16 +205,16 @@ namespace CS296N_Term_Project.Migrations
                 {
                     table.PrimaryKey("PK_ImageComments", x => x.CommentId);
                     table.ForeignKey(
+                        name: "FK_ImageComments_AspNetUsers_CommenterId",
+                        column: x => x.CommenterId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_ImageComments_Images_PostId",
                         column: x => x.PostId,
                         principalTable: "Images",
                         principalColumn: "PostId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ImageComments_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -224,7 +224,7 @@ namespace CS296N_Term_Project.Migrations
                 {
                     CommentId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(nullable: true),
+                    CommenterId = table.Column<string>(nullable: true),
                     PostId = table.Column<int>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Likes = table.Column<int>(nullable: false),
@@ -234,16 +234,16 @@ namespace CS296N_Term_Project.Migrations
                 {
                     table.PrimaryKey("PK_VideoComments", x => x.CommentId);
                     table.ForeignKey(
+                        name: "FK_VideoComments_AspNetUsers_CommenterId",
+                        column: x => x.CommenterId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_VideoComments_Videos_PostId",
                         column: x => x.PostId,
                         principalTable: "Videos",
                         principalColumn: "PostId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_VideoComments_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -310,24 +310,24 @@ namespace CS296N_Term_Project.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ImageComments_CommenterId",
+                table: "ImageComments",
+                column: "CommenterId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ImageComments_PostId",
                 table: "ImageComments",
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ImageComments_UserId",
-                table: "ImageComments",
-                column: "UserId");
+                name: "IX_VideoComments_CommenterId",
+                table: "VideoComments",
+                column: "CommenterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VideoComments_PostId",
                 table: "VideoComments",
                 column: "PostId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_VideoComments_UserId",
-                table: "VideoComments",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -360,10 +360,10 @@ namespace CS296N_Term_Project.Migrations
                 name: "Images");
 
             migrationBuilder.DropTable(
-                name: "Videos");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Videos");
         }
     }
 }

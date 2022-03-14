@@ -36,23 +36,48 @@ namespace CS296N_Term_Project.Controllers
         {
             ViewBag.ImagePost = await repo.SelectImagesByIdAsync(id);
             CommentVM temp = new CommentVM();
+            //temp.PostId = id;
             return View(temp);
         }
 
         [HttpPost]
         [Authorize]
+        //TODO: Fix adding comments and loading them
         public async Task<IActionResult> SingleImage(CommentVM comment)
         {
-            var user = await userManager.GetUserAsync(User);
+            var user = userManager.GetUserAsync(User).Result;
             ImageComment temp = new ImageComment();
             temp.Description = comment.Description;
-            temp.Post = comment.imagePost;
-            temp.User = user;
-            repo.Insert(temp);
+            //temp.Post = await repo.SelectImagesByIdAsync(comment.PostId);
+            temp.Commenter = user;
+
+            var post = (from p in repo.Images
+                        where p.PostId == comment.PostId
+                        select p).First<ImagePost>();
+            post.AddComment(temp);
+            //repo.Insert(temp);
             await repo.SaveAsync();
-            return RedirectToAction("SingleImage", comment.imagePost.PostId);
+            return RedirectToAction("SingleImage", comment.PostId);
             //return View("SingleImage", comment.imagePost.PostId);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ImageUpload()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ImageUpload(ImagePost newPost)
+        {
+            var user = userManager.GetUserAsync(User).Result;
+            newPost.UserId = user.Id;
+            newPost.PosterName = user.ScreenName;
+            newPost.Likes = 0;
+            //repo.Insert(newPost);
+            return RedirectToAction("Index");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

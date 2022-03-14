@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CS296N_Term_Project.Migrations
 {
     [DbContext(typeof(AllContext))]
-    [Migration("20220313052120_big-mod")]
+    [Migration("20220313231123_big-mod")]
     partial class bigmod
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,6 +112,9 @@ namespace CS296N_Term_Project.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CommenterId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -121,14 +124,11 @@ namespace CS296N_Term_Project.Migrations
                     b.Property<int?>("PostId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("CommentId");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("CommenterId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("PostId");
 
                     b.ToTable("ImageComments");
                 });
@@ -194,6 +194,9 @@ namespace CS296N_Term_Project.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CommenterId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -206,14 +209,11 @@ namespace CS296N_Term_Project.Migrations
                     b.Property<int?>("PostId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("CommentId");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("CommenterId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("PostId");
 
                     b.ToTable("VideoComments");
                 });
@@ -408,24 +408,24 @@ namespace CS296N_Term_Project.Migrations
 
             modelBuilder.Entity("CS296N_Term_Project.Models.ImageComment", b =>
                 {
+                    b.HasOne("CS296N_Term_Project.Models.AppUser", "Commenter")
+                        .WithMany()
+                        .HasForeignKey("CommenterId");
+
                     b.HasOne("CS296N_Term_Project.Models.ImagePost", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId");
-
-                    b.HasOne("CS296N_Term_Project.Models.AppUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("CS296N_Term_Project.Models.VideoComment", b =>
                 {
+                    b.HasOne("CS296N_Term_Project.Models.AppUser", "Commenter")
+                        .WithMany()
+                        .HasForeignKey("CommenterId");
+
                     b.HasOne("CS296N_Term_Project.Models.VideoPost", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId");
-
-                    b.HasOne("CS296N_Term_Project.Models.AppUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
