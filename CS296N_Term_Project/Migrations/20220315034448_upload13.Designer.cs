@@ -4,14 +4,16 @@ using CS296N_Term_Project.Models.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CS296N_Term_Project.Migrations
 {
     [DbContext(typeof(AllContext))]
-    partial class AllContextModelSnapshot : ModelSnapshot
+    [Migration("20220315034448_upload13")]
+    partial class upload13
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

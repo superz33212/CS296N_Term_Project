@@ -4,14 +4,16 @@ using CS296N_Term_Project.Models.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CS296N_Term_Project.Migrations
 {
     [DbContext(typeof(AllContext))]
-    partial class AllContextModelSnapshot : ModelSnapshot
+    [Migration("20220315020728_upload2")]
+    partial class upload2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -188,7 +190,7 @@ namespace CS296N_Term_Project.Migrations
                             PostId = 3,
                             Description = "This is a with an uploaded image",
                             Likes = 0,
-                            Path = "~/MagicaVoxelImages/Spiral_100000.png",
+                            Path = "C:\\MagicaVoxelImages\\1hclz1se.g0y",
                             PosterName = "Tester1",
                             Title = "Test3",
                             UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94"

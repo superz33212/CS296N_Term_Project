@@ -1,12 +1,15 @@
 ﻿using CS296N_Term_Project.Models;
 using CS296N_Term_Project.Models.DataLayer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Web;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -83,6 +86,70 @@ namespace CS296N_Term_Project.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        //=============================================================================================================================
+
+        private readonly long _fileSizeLimit = 2097162; // 2,097,162
+        private readonly string[] _permittedExtensions = { ".png", ".jpg", ".jpeg", ".gif" };
+        private readonly string _targetFilePath = Path.GetFullPath(@"wwwroot\MagicaVoxelImages");
+        //HttpContext.Current.Server.MapPath(@"~\wwwroot\MagicaVoxelImages");
+        public string Result { get; private set; }
+
+        [HttpGet]
+        public IActionResult Upload()
+        {
+            BufferedSingleFileUploadPhysical model = new BufferedSingleFileUploadPhysical();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Upload(IFormFile formFile)
+        {
+            if (!ModelState.IsValid)
+            {
+                Result = "Please correct the form.";
+
+                return View();
+            }
+
+            var formFileContent =
+                await FileHelpers.ProcessFormFile<BufferedSingleFileUploadPhysical>(
+                    formFile, ModelState, _permittedExtensions,
+                    _fileSizeLimit);
+
+            if (!ModelState.IsValid)
+            {
+                Result = "Please correct the form.";
+                return View();
+            }
+
+            // For the file name of the uploaded file stored
+            // server-side, use Path.GetRandomFileName to generate a safe
+            // random file name.
+            var trustedFileNameForFileStorage = Path.GetRandomFileName();
+            var filePath = Path.Combine(
+                _targetFilePath, trustedFileNameForFileStorage);
+
+            // **WARNING!**
+            // In the following example, the file is saved without
+            // scanning the file's contents. In most production
+            // scenarios, an anti-virus/anti-malware scanner API
+            // is used on the file before making the file available
+            // for download or for use by other systems. 
+            // For more information, see the topic that accompanies 
+            // this sample.
+
+            using (var fileStream = System.IO.File.Create(filePath))
+            {
+                await fileStream.WriteAsync(formFileContent);
+
+                // To work directly with a FormFile, use the following
+                // instead:
+                //await FileUpload.FormFile.CopyToAsync(fileStream);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

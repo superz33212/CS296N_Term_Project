@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,7 +30,8 @@ namespace CS296N_Term_Project.Models.Contexts
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ImagePost>().HasData(
                 new ImagePost { PostId = 1, UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", PosterName = "Tester1", Title = "Test", Description = "This is a test", Likes = 0, Path = "https://media.discordapp.net/attachments/623342534860603394/934990260058873896/V2_33000x3000.png?width=905&height=905" },
-                new ImagePost { PostId = 2, UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", PosterName = "Tester1", Title = "Test2", Description = "This is a test2", Likes = 0, Path = "https://media.discordapp.net/attachments/623342534860603394/934980542603075615/snap2020-02-02-20-44-10.png?width=1290&height=726" }
+                new ImagePost { PostId = 2, UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", PosterName = "Tester1", Title = "Test2", Description = "This is a test2", Likes = 0, Path = "https://media.discordapp.net/attachments/623342534860603394/934980542603075615/snap2020-02-02-20-44-10.png?width=1290&height=726" },
+                new ImagePost { PostId = 3, UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", PosterName = "Tester1", Title = "Test3", Description = "This is a with an uploaded image", Likes = 0, Path = "~/MagicaVoxelImages/Spiral_100000.png" }
                 );
             /*
             modelBuilder.Entity<ImageComment>().HasData(

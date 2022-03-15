@@ -6,6 +6,7 @@
 <main>
     <div class="flex-parent">
         <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="ImageUpload">Upload</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="Upload">Upload(temp)</a>
         @foreach (ImagePost post in ViewBag.ImagePosts)
         {
             <a class="nav-link text-dark" asp-area="" asp-route-id="@post.PostId" asp-controller="Image" asp-action="SingleImage">
