@@ -117,17 +117,46 @@ namespace CS296N_Term_Project.Models.DataLayer
         }
         #endregion ====================================
 
+        #region Search Bt Name ========================
+        public async Task<IEnumerable<ImagePost>> SearchImagesAsync(string input)
+        {
+            List<ImagePost> temp = new List<ImagePost>();
+            if (input != null && input != "")
+            {
+                temp = await db.Images.Where(s => s.Title.Contains(input)).ToListAsync<ImagePost>();
+            }
+            else
+            {
+                temp = await db.Images.Include(i => i.Comments).ToListAsync<ImagePost>();
+            }
+            return temp;
+        }
+
+        public async Task<IEnumerable<VideoPost>> SearchVideoAsync(string input)
+        {
+            List<VideoPost> temp = new List<VideoPost>();
+            if (input != null && input != "")
+            {
+                temp = await db.Videos.Where(s => s.Title.Contains(input)).ToListAsync<VideoPost>();
+            }
+            else
+            {
+                temp = await db.Videos.Include(i => i.Comments).ToListAsync<VideoPost>();
+            }
+            return temp;
+        }
+        #endregion
+
         #region Select Large Groups ===================
         public async Task<IEnumerable<ImagePost>> SelectImagesAsync()
         {
-            List<ImagePost> temp = await db.Images.Include(i => i.Comments)
-                                                    .ToListAsync<ImagePost>();
+            List<ImagePost> temp = await db.Images.Include(i => i.Comments).ToListAsync<ImagePost>();
             return temp;
         }
 
         public async Task<IEnumerable<VideoPost>> SelectVideoAsync()
         {
-            List<VideoPost> temp = await db.Videos.ToListAsync<VideoPost>();
+            List<VideoPost> temp = await db.Videos.Include(i => i.Comments).ToListAsync<VideoPost>();
             return temp;
         }
         #endregion ====================================

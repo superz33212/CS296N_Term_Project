@@ -34,6 +34,9 @@ namespace CS296N_Term_Project.Models.DataLayer
         Task<ImagePost> SelectImagesByIdAsync(int id);
         Task<VideoPost> SelectVideoByIdAsync(int id);
 
+        Task<IEnumerable<ImagePost>> SearchImagesAsync(string input);
+        Task<IEnumerable<VideoPost>> SearchVideoAsync(string input);
+
         Task<IEnumerable<ImagePost>> SelectImagesAsync();
         Task<IEnumerable<VideoPost>> SelectVideoAsync();
     }

@@ -12,6 +12,7 @@ using System.IO;
 using System.Web;
 using System.Linq;
 using System.Threading.Tasks;
+using CS296N_Term_Project.Models.ViewModels;
 
 namespace CS296N_Term_Project.Controllers
 {
@@ -81,6 +82,21 @@ namespace CS296N_Term_Project.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Search()
+        {
+            string search = "";
+            ViewBag.ImagePosts = await repo.SearchImagesAsync(search);
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Search(string search = "")
+        {
+            ViewBag.ImagePosts = await repo.SearchImagesAsync(search);
+            return View();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -95,17 +111,18 @@ namespace CS296N_Term_Project.Controllers
         private readonly string _targetFilePath = Path.GetFullPath(@"wwwroot\MagicaVoxelImages");
         //HttpContext.Current.Server.MapPath(@"~\wwwroot\MagicaVoxelImages");
         public string Result { get; private set; }
-
+        [Authorize]
         [HttpGet]
         public IActionResult Upload()
         {
-            BufferedSingleFileUploadPhysical model = new BufferedSingleFileUploadPhysical();
+            NewPostVM model = new NewPostVM();
             return View(model);
         }
-
+        [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Upload(IFormFile formFile)
+        public async Task<IActionResult> Upload(NewPostVM newPost)
         {
+
             if (!ModelState.IsValid)
             {
                 Result = "Please correct the form.";
@@ -115,7 +132,7 @@ namespace CS296N_Term_Project.Controllers
 
             var formFileContent =
                 await FileHelpers.ProcessFormFile<BufferedSingleFileUploadPhysical>(
-                    formFile, ModelState, _permittedExtensions,
+                    newPost.Image.FormFile, ModelState, _permittedExtensions,
                     _fileSizeLimit);
 
             if (!ModelState.IsValid)
@@ -143,11 +160,19 @@ namespace CS296N_Term_Project.Controllers
             using (var fileStream = System.IO.File.Create(filePath))
             {
                 await fileStream.WriteAsync(formFileContent);
-
+                newPost.imagePost.Path = fileStream.Name;
                 // To work directly with a FormFile, use the following
                 // instead:
                 //await FileUpload.FormFile.CopyToAsync(fileStream);
             }
+
+            //Add stuff to DB --fileStream
+            var user = userManager.GetUserAsync(User).Result;
+            newPost.imagePost.UserId = user.Id;
+            newPost.imagePost.PosterName = user.ScreenName;
+            newPost.imagePost.Likes = 0;
+            repo.Insert(newPost.imagePost);
+            await repo.SaveAsync();
 
             return RedirectToAction("Index");
         }
