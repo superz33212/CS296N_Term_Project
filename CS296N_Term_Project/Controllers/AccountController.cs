@@ -22,6 +22,12 @@ namespace CCS296N_Term_Project.Controllers
             signInManager = signInMngr;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            return View();
+        }
+
         public IActionResult Register()
         {
             return View();

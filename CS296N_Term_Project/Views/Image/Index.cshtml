@@ -4,25 +4,24 @@
 
 
 <main>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="Upload">Upload</a>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="Search">Search</a>
     <div class="flex-parent">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="ImageUpload">Upload</a>
-        <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="Upload">Upload(temp)</a>
-        <a class="nav-link text-dark" asp-area="" asp-controller="Image" asp-action="Search">Search</a>
         @foreach (ImagePost post in ViewBag.ImagePosts)
         {
-            <a class="nav-link text-dark" asp-area="" asp-route-id="@post.PostId" asp-controller="Image" asp-action="SingleImage">
-                <div class="post-obj">
-                    <h3 class="post-obj-title">@post.Title</h3>
-                    <img src=@Url.Content(post.Path) alt="Post Image" class="post-obj-img">
-                    <div class="post-obj-top">
-                        <h5 class="poster-name">@post.PosterName </h5>
-                        <img src="https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png" alt="Like Button" class="post-like-button">
-                    </div>
-                    <div class="post-obj-bottom">
-                        <h6 class="post-description">@post.Description</h6>
-                    </div>
+        <a class="nav-link text-dark" asp-area="" asp-route-id="@post.PostId" asp-controller="Image" asp-action="SingleImage">
+            <div class="post-obj">
+                <h3 class="post-obj-title">@post.Title</h3>
+                <img src=@Url.Content(post.Path) alt="Post Image" class="post-obj-img">
+                <div class="post-obj-top">
+                    <h5 class="poster-name">@post.PosterName </h5>
+                    <img src="https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png" alt="Like Button" class="post-like-button">
                 </div>
-            </a>
+                <div class="post-obj-bottom">
+                    <h6 class="post-description">@post.Description</h6>
+                </div>
+            </div>
+        </a>
         }
     </div>
 </main>

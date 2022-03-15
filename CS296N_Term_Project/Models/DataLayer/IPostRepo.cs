@@ -8,6 +8,7 @@ namespace CS296N_Term_Project.Models.DataLayer
     public interface IPostRepo
     {
         public IQueryable<ImagePost> Images { get; }
+        public IQueryable<VideoPost> Videos { get; }
 
         void Insert(ImagePost obj);
         void Insert(VideoPost obj);
@@ -35,9 +36,9 @@ namespace CS296N_Term_Project.Models.DataLayer
         Task<VideoPost> SelectVideoByIdAsync(int id);
 
         Task<IEnumerable<ImagePost>> SearchImagesAsync(string input);
-        Task<IEnumerable<VideoPost>> SearchVideoAsync(string input);
+        Task<IEnumerable<VideoPost>> SearchVideosAsync(string input);
 
         Task<IEnumerable<ImagePost>> SelectImagesAsync();
-        Task<IEnumerable<VideoPost>> SelectVideoAsync();
+        Task<IEnumerable<VideoPost>> SelectVideosAsync();
     }
 }

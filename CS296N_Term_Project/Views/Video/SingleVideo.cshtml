@@ -1,0 +1,35 @@
+﻿@model CommentVM;
+@{
+    ViewData["Title"] = "SingleVideo";
+}
+
+
+<main>
+    <h1 class="post-obj-title">@ViewBag.VideoPost.Title</h1>
+    <img src="@Url.Content(ViewBag.VideoPost.Path)" alt="Post Video" class="post-obj-img">
+    <div class="single-post-obj-top">
+        <h5 class="poster-name">@ViewBag.VideoPost.PosterName</h5>
+        <img src="https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png" alt="Like Button" class="post-like-button">
+    </div>
+    <div class="post-obj-bottom">
+        <h6 class="post-description">@ViewBag.VideoPost.Description</h6>
+    </div>
+    <div class="post-comments">
+        <h3>Comments</h3>
+        <form asp-action="SingleVideo" class="post-add-comment">
+            <textarea placeholder="Comment" asp-for="Description"></textarea>
+            <input type="hidden" asp-for="PostId" value="@ViewBag.VideoPost.PostId" />
+            <button type="submit" class="btn btn-primary">Comment</button>
+        </form>
+        @if (ViewBag.VideoPost.GetComments() != null)
+        {
+            @foreach (ImageComment comment in ViewBag.VideoPost.GetComments())
+            {
+                <div class="post-comment">
+                    <h3 class="commenter-name">@comment.Commenter.ScreenName</h3>
+                    <p class="comment-content">@comment.Description</p>
+                </div>
+            }
+        }
+    </div>
+</main>

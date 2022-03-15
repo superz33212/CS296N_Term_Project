@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\MagicaVoxelVideos\" />
     <Folder Include="wwwroot\MagicaVoxelImages\" />
   </ItemGroup>
 

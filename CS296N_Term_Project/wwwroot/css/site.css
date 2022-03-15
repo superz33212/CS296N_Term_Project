@@ -119,6 +119,18 @@ a.navbar-brand {
 
 }
 
+/*------------------------------------Upload------------------------------------*/
+
+.upload-title {
+    width: auto;
+    min-width: 400px;
+
+}
+.upload-description {
+    width: auto;
+    min-width: 800px;
+}
+
 /*==================================End My CSS==================================*/
 
 /* Provide sufficient contrast against white background */

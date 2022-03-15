@@ -26,6 +26,15 @@ namespace CS296N_Term_Project.Models.DataLayer
             }
         }
 
+        public IQueryable<VideoPost> Videos
+        {
+            get
+            {
+                return this.db.Videos.Include(r => r.Comments)
+                                      .ThenInclude(r => r.Commenter);
+            }
+        }
+
         private UserManager<AppUser> userManager;
 
         #region Insert, Update, Remove, Save ==========
@@ -132,7 +141,7 @@ namespace CS296N_Term_Project.Models.DataLayer
             return temp;
         }
 
-        public async Task<IEnumerable<VideoPost>> SearchVideoAsync(string input)
+        public async Task<IEnumerable<VideoPost>> SearchVideosAsync(string input)
         {
             List<VideoPost> temp = new List<VideoPost>();
             if (input != null && input != "")
@@ -154,7 +163,7 @@ namespace CS296N_Term_Project.Models.DataLayer
             return temp;
         }
 
-        public async Task<IEnumerable<VideoPost>> SelectVideoAsync()
+        public async Task<IEnumerable<VideoPost>> SelectVideosAsync()
         {
             List<VideoPost> temp = await db.Videos.Include(i => i.Comments).ToListAsync<VideoPost>();
             return temp;

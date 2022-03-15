@@ -21,5 +21,19 @@ namespace CS296N_Term_Project.Models
         public string Path { get; set; }
         public string ThumbPath { get; set; }
         public ICollection<VideoComment> Comments { get; set; }
+
+        public List<VideoComment> GetComments()
+        {
+            if (Comments != null)
+            {
+                return Comments.ToList();
+            }
+            return new List<VideoComment>();
+        }
+
+        public void AddComment(VideoComment comment)
+        {
+            Comments.Add(comment);
+        }
     }
 }

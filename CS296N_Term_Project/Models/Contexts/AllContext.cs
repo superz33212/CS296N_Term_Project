@@ -40,8 +40,8 @@ namespace CS296N_Term_Project.Models.Contexts
                 );
             */
             modelBuilder.Entity<VideoPost>().HasData(
-                new ImagePost { PostId = 1, UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", PosterName = "Tester1", Title = "Test", Description = "This is a test", Likes = 0, Path = "test" },
-                new ImagePost { PostId = 2, UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", PosterName = "Tester1", Title = "Test2", Description = "This is a test2", Likes = 0, Path = "test2" }
+                new VideoPost { PostId = 1, UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", PosterName = "Tester1", Title = "Test", Description = "This is a test", Likes = 0, Path = "test", ThumbPath = "https://cdn.discordapp.com/attachments/623342534860603394/934979679654379680/Spiral_100000.png" },
+                new VideoPost { PostId = 2, UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", PosterName = "Tester1", Title = "Test2", Description = "This is a test2", Likes = 0, Path = "test2", ThumbPath = "https://cdn.discordapp.com/attachments/623342534860603394/953190646297030716/snap2020-08-19-15-19-27.png" }
                 );
 
         }
