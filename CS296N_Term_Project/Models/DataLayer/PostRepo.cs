@@ -115,7 +115,10 @@ namespace CS296N_Term_Project.Models.DataLayer
 
         public async Task<ImagePost> SelectImagesByIdAsync(int id)
         {
-            ImagePost temp = await db.Images.Where(s => s.PostId == id).FirstAsync<ImagePost>();
+            ImagePost temp = await db.Images.Include(s => s.Comments).
+                ThenInclude(s => s.Commenter).
+                Where(s => s.PostId == id).
+                FirstAsync<ImagePost>();
             return temp;
         }
 

@@ -62,8 +62,6 @@ namespace CS296N_Term_Project
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

@@ -4,14 +4,16 @@ using CS296N_Term_Project.Models.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CS296N_Term_Project.Migrations
 {
     [DbContext(typeof(AllContext))]
-    partial class AllContextModelSnapshot : ModelSnapshot
+    [Migration("20220315233744_image-fix2")]
+    partial class imagefix2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,7 +281,7 @@ namespace CS296N_Term_Project.Migrations
                             Likes = 0,
                             Path = "test",
                             PosterName = "Tester1",
-                            ThumbPath = "MagicaVoxelImages/Spiral_100000.png",
+                            ThumbPath = "https://cdn.discordapp.com/attachments/623342534860603394/934979679654379680/Spiral_100000.png",
                             Title = "Test",
                             UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94"
                         },
@@ -290,7 +292,7 @@ namespace CS296N_Term_Project.Migrations
                             Likes = 0,
                             Path = "test2",
                             PosterName = "Tester1",
-                            ThumbPath = "MagicaVoxelImages/waterfall.png",
+                            ThumbPath = "https://cdn.discordapp.com/attachments/623342534860603394/953190646297030716/snap2020-08-19-15-19-27.png",
                             Title = "Test2",
                             UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94"
                         });

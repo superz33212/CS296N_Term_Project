@@ -4,14 +4,16 @@ using CS296N_Term_Project.Models.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CS296N_Term_Project.Migrations
 {
     [DbContext(typeof(AllContext))]
-    partial class AllContextModelSnapshot : ModelSnapshot
+    [Migration("20220315215236_comment-fix")]
+    partial class commentfix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,7 +99,6 @@ namespace CS296N_Term_Project.Migrations
                             NormalizedUserName = "TEST",
                             PasswordHash = "AQAAAAEAACcQAAAAEFxcmHoCg810zcza/HOr07LoC9Z/Gs5lV06I3FMUJ3tfX52yMii9unV33aOkGnFFZA==",
                             PhoneNumberConfirmed = false,
-                            ScreenName = "Test",
                             SecurityStamp = "LAPZU4RWHYADCUAU45PNE4X3RYZVPO2S",
                             TwoFactorEnabled = false,
                             UserName = "Test"
@@ -130,16 +131,6 @@ namespace CS296N_Term_Project.Migrations
                     b.HasIndex("PostId");
 
                     b.ToTable("ImageComments");
-
-                    b.HasData(
-                        new
-                        {
-                            CommentId = 1,
-                            CommenterId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94",
-                            Description = "This is a test",
-                            Likes = 0,
-                            PostId = 1
-                        });
                 });
 
             modelBuilder.Entity("CS296N_Term_Project.Models.ImagePost", b =>
@@ -179,7 +170,7 @@ namespace CS296N_Term_Project.Migrations
                             PostId = 1,
                             Description = "This is a test",
                             Likes = 0,
-                            Path = "MagicaVoxelImages/5.1.png",
+                            Path = "https://media.discordapp.net/attachments/623342534860603394/934990260058873896/V2_33000x3000.png?width=905&height=905",
                             PosterName = "Tester1",
                             Title = "Test",
                             UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94"
@@ -189,7 +180,7 @@ namespace CS296N_Term_Project.Migrations
                             PostId = 2,
                             Description = "This is a test2",
                             Likes = 0,
-                            Path = "MagicaVoxelImages/Boat.png",
+                            Path = "https://media.discordapp.net/attachments/623342534860603394/934980542603075615/snap2020-02-02-20-44-10.png?width=1290&height=726",
                             PosterName = "Tester1",
                             Title = "Test2",
                             UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94"
@@ -199,7 +190,7 @@ namespace CS296N_Term_Project.Migrations
                             PostId = 3,
                             Description = "This is a with an uploaded image",
                             Likes = 0,
-                            Path = "MagicaVoxelImages/Spiral_100000.png",
+                            Path = "~/MagicaVoxelImages/Spiral_100000.png",
                             PosterName = "Tester1",
                             Title = "Test3",
                             UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94"
@@ -279,7 +270,7 @@ namespace CS296N_Term_Project.Migrations
                             Likes = 0,
                             Path = "test",
                             PosterName = "Tester1",
-                            ThumbPath = "MagicaVoxelImages/Spiral_100000.png",
+                            ThumbPath = "https://cdn.discordapp.com/attachments/623342534860603394/934979679654379680/Spiral_100000.png",
                             Title = "Test",
                             UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94"
                         },
@@ -290,7 +281,7 @@ namespace CS296N_Term_Project.Migrations
                             Likes = 0,
                             Path = "test2",
                             PosterName = "Tester1",
-                            ThumbPath = "MagicaVoxelImages/waterfall.png",
+                            ThumbPath = "https://cdn.discordapp.com/attachments/623342534860603394/953190646297030716/snap2020-08-19-15-19-27.png",
                             Title = "Test2",
                             UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94"
                         });

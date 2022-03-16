@@ -13,7 +13,8 @@ namespace CS296N_Term_Project.Models
         public string ScreenName { get; set; }
         //TODO: User likes?
         //public List<Likes> LikedPosts { get; set; }
-        //public ICollection<Comment> Comments { get; set; }
+        public ICollection<ImageComment> ImageComments { get; set; }
+        public ICollection<VideoComment> VideoComments { get; set; }
         [NotMapped]
         public IList<string> RoleNames { get; set; }
     }

@@ -21,15 +21,17 @@
             <input type="hidden" asp-for="PostId" value="@ViewBag.ImagePost.PostId" />
             <button type="submit" class="btn btn-primary">Comment</button>
         </form>
-        @if (ViewBag.ImagePost.GetComments() != null)
-        {
-            @foreach (ImageComment comment in ViewBag.ImagePost.GetComments())
+        <div class="post-comments">
+            @if (ViewBag.ImagePost.Comments != null)
             {
-                <div class="post-comment">
-                    <h3 class="commenter-name">@comment.Commenter.ScreenName</h3>
-                    <p class="comment-content">@comment.Description</p>
-                </div>
+                @foreach (ImageComment comment in ViewBag.ImagePost.Comments)
+                {
+                    <div class="post-comment">
+                        <h3 class="commenter-name">@comment.Commenter.ScreenName</h3>
+                        <p class="comment-content">@comment.Description</p>
+                    </div>
+                }
             }
-        }
+        </div>
     </div>
 </main>

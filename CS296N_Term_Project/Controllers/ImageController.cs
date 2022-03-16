@@ -160,7 +160,8 @@ namespace CS296N_Term_Project.Controllers
             using (var fileStream = System.IO.File.Create(filePath))
             {
                 await fileStream.WriteAsync(formFileContent);
-                newPost.imagePost.Path = fileStream.Name;
+                string[] splitPath = fileStream.Name.Split("\\");
+                newPost.imagePost.Path = "/MagicaVoxelImages/" + splitPath[splitPath.Length-1];
                 // To work directly with a FormFile, use the following
                 // instead:
                 //await FileUpload.FormFile.CopyToAsync(fileStream);

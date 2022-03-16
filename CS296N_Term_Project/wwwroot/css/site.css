@@ -99,16 +99,30 @@ a.navbar-brand {
 .post-comments {
     display: grid;
     grid-template-columns: 100%;
+    justify-content: right;
 }
 
 .post-add-comment {
     display: grid;
     grid-template-columns: 100%;
-    overflow: auto;
+    
 }
 
 .post-comment {
-    
+    justify-content: right;
+    overflow: auto;
+    position: relative;
+    min-width: 400px;
+    margin: auto;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.418);
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: left;
+    cursor: default;
+    object-fit: contain;
+    grid-template-columns: 100%;
 }
 
 .commenter-name {

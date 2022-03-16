@@ -12,7 +12,7 @@
             <a class="nav-link text-dark" asp-area="" asp-route-id="@post.PostId" asp-controller="Video" asp-action="SingleVideo">
                 <div class="post-obj">
                     <h3 class="post-obj-title">@post.Title</h3>
-                    <img src=@Url.Content(post.ThumbPath) alt="Post Thumbnail" class="post-obj-img">
+                    <img src=@post.ThumbPath alt="Post Thumbnail" class="post-obj-img">
                     <div class="post-obj-top">
                         <h5 class="poster-name">@post.PosterName </h5>
                         <img src="https://icones.pro/wp-content/uploads/2021/04/icone-noire-noir.png" alt="Like Button" class="post-like-button">

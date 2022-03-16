@@ -21,15 +21,6 @@ namespace CS296N_Term_Project.Models
         public string Path { get; set; }
         public ICollection<ImageComment> Comments { get; set; }
 
-        public List<ImageComment> GetComments()
-        {
-            if (Comments != null)
-            {
-                return Comments.ToList();
-            }
-            return new List<ImageComment>();
-        }
-
         public void AddComment(ImageComment comment)
         {
             Comments.Add(comment);

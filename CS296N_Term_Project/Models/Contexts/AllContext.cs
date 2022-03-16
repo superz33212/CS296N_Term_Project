@@ -21,27 +21,95 @@ namespace CS296N_Term_Project.Models.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            AppUser temp = new AppUser 
+                { 
+                    Id = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", 
+                    UserName = "Test", 
+                    NormalizedUserName = "TEST", 
+                    PasswordHash = "AQAAAAEAACcQAAAAEFxcmHoCg810zcza/HOr07LoC9Z/Gs5lV06I3FMUJ3tfX52yMii9unV33aOkGnFFZA==", 
+                    SecurityStamp = "LAPZU4RWHYADCUAU45PNE4X3RYZVPO2S", 
+                    ConcurrencyStamp = "cd14427e-350a-4316-b67c-1e581905947e", 
+                    PhoneNumberConfirmed = false, 
+                    TwoFactorEnabled = false, 
+                    LockoutEnabled = true, 
+                    AccessFailedCount = 0,
+                    ScreenName = "Test"
+                };
+            ImagePost tempPost = new ImagePost 
+                { 
+                    PostId = 1, 
+                    UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", 
+                    PosterName = "Tester1", 
+                    Title = "Test", 
+                    Description = "This is a test", 
+                    Likes = 0, 
+                    Path = "MagicaVoxelImages/5.1.png"
+            };
+            
             modelBuilder.Entity<AppUser>().HasData(
-                new AppUser { Id = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", UserName = "Test", NormalizedUserName = "TEST", PasswordHash = "AQAAAAEAACcQAAAAEFxcmHoCg810zcza/HOr07LoC9Z/Gs5lV06I3FMUJ3tfX52yMii9unV33aOkGnFFZA==", SecurityStamp = "LAPZU4RWHYADCUAU45PNE4X3RYZVPO2S", ConcurrencyStamp = "cd14427e-350a-4316-b67c-1e581905947e", PhoneNumberConfirmed = false, TwoFactorEnabled = false, LockoutEnabled = true, AccessFailedCount = 0 }
+                temp
                 );
             //TODO: Get AppUser into seeded posts
             //AppUser temp = userManager.FindByIdAsync("6e421fd4-184e-48ed-b0e6-3308fa4ffd94").Result;
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ImagePost>().HasData(
-                new ImagePost { PostId = 1, UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", PosterName = "Tester1", Title = "Test", Description = "This is a test", Likes = 0, Path = "https://media.discordapp.net/attachments/623342534860603394/934990260058873896/V2_33000x3000.png?width=905&height=905" },
-                new ImagePost { PostId = 2, UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", PosterName = "Tester1", Title = "Test2", Description = "This is a test2", Likes = 0, Path = "https://media.discordapp.net/attachments/623342534860603394/934980542603075615/snap2020-02-02-20-44-10.png?width=1290&height=726" },
-                new ImagePost { PostId = 3, UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", PosterName = "Tester1", Title = "Test3", Description = "This is a with an uploaded image", Likes = 0, Path = "~/MagicaVoxelImages/Spiral_100000.png" }
+                tempPost,
+                new ImagePost 
+                {   
+                    PostId = 2, 
+                    UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", 
+                    PosterName = "Tester1", 
+                    Title = "Test2", 
+                    Description = "This is a test2", 
+                    Likes = 0, 
+                    Path = "MagicaVoxelImages/Boat.png"
+                },
+                new ImagePost 
+                { 
+                    PostId = 3, 
+                    UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", 
+                    PosterName = "Tester1", 
+                    Title = "Test3", 
+                    Description = "This is a with an uploaded image", 
+                    Likes = 0, 
+                    Path = "MagicaVoxelImages/Spiral_100000.png" }
                 );
-            /*
+
             modelBuilder.Entity<ImageComment>().HasData(
-                new ImageComment { CommentId = 1, User = temp, Post = "Tester1", Title = "Test", Description = "This is a test", Likes = 0, Path = "test" },
-                
+                new
+                {
+                    CommentId = 1,
+                    CommenterId = temp.Id,
+                    PostId = tempPost.PostId,
+                    Description = "This is a test",
+                    Likes = 0
+                }
                 );
-            */
+
             modelBuilder.Entity<VideoPost>().HasData(
-                new VideoPost { PostId = 1, UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", PosterName = "Tester1", Title = "Test", Description = "This is a test", Likes = 0, Path = "test", ThumbPath = "https://cdn.discordapp.com/attachments/623342534860603394/934979679654379680/Spiral_100000.png" },
-                new VideoPost { PostId = 2, UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", PosterName = "Tester1", Title = "Test2", Description = "This is a test2", Likes = 0, Path = "test2", ThumbPath = "https://cdn.discordapp.com/attachments/623342534860603394/953190646297030716/snap2020-08-19-15-19-27.png" }
+                new VideoPost 
+                { 
+                    PostId = 1, 
+                    UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", 
+                    PosterName = "Tester1", 
+                    Title = "Test", 
+                    Description = "This is a test", 
+                    Likes = 0, 
+                    Path = "test", 
+                    ThumbPath = "MagicaVoxelImages/Spiral_100000.png"
+                },
+                new VideoPost 
+                { 
+                    PostId = 2, 
+                    UserId = "6e421fd4-184e-48ed-b0e6-3308fa4ffd94", 
+                    PosterName = "Tester1", 
+                    Title = "Test2", 
+                    Description = "This is a test2", 
+                    Likes = 0, 
+                    Path = "test2", 
+                    ThumbPath = "MagicaVoxelImages/waterfall.png"
+                }
                 );
 
         }
